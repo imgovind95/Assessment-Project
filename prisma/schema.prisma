@@ -1,0 +1,69 @@
+// ─────────────────────────────────────────────────────────────
+// Prisma Schema — Finance Data Processing Backend
+// ─────────────────────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Enums ────────────────────────────────────────────────────
+
+/// keeps track of who is allowed to do what.
+enum Role {
+  VIEWER
+  ANALYST
+  ADMIN
+}
+
+/// is money coming in or going out?
+enum RecordType {
+  INCOME
+  EXPENSE
+}
+
+// ── Models ───────────────────────────────────────────────────
+
+/// anyone who can log into the system. we can ban them by flipping isActive.
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(VIEWER) // default to least privilege, just to be safe
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  // Relations: all the stuff this user has created
+  financialRecords FinancialRecord[]
+
+  @@map("users")
+}
+
+/// A single logged transaction. we never really delete these, just hide them.
+model FinancialRecord {
+  id          String     @id @default(uuid())
+  amount      Decimal    @db.Decimal(12, 2) // keep those decimal points safe
+  type        RecordType
+  category    String
+  date        DateTime
+  notes       String?
+  isDeleted   Boolean    @default(false)    // flip this to true instead of deleting!
+  createdById String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // Relations: who actually logged this entry?
+  createdBy User @relation(fields: [createdById], references: [id])
+
+  // adding some indexes here so our dashboard queries don't take forever
+  @@index([type])
+  @@index([category])
+  @@index([date])
+  @@index([createdById])
+  @@map("financial_records")
+}
