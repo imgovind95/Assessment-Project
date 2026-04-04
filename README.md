@@ -7,7 +7,7 @@ Built with **Node.js + Express + TypeScript + PostgreSQL + Prisma** — aka the 
 
 ---
 
-## 📑 What's Inside
+## What's Inside
 
 - [What This Thing Does](#what-this-thing-does)
 - [Tech We're Using](#tech-were-using)
