@@ -1,4 +1,4 @@
-# 💰 Finance Backend — Zorgyn
+# 💰 Finance Backend — Zorvyn
 
 > basically a backend that lets people with different roles mess with financial records.
 > admins rule everything, analysts can add stuff, viewers can only... well, view.
