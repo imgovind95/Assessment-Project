@@ -1,4 +1,4 @@
-# 💰 Finance Backend — Zorvyn
+# Finance Backend — Zorvyn
 
 > basically a backend that lets people with different roles mess with financial records.
 > admins rule everything, analysts can add stuff, viewers can only... well, view.
@@ -153,20 +153,20 @@ Server starts at `http://localhost:3000` — you should see a log confirming it.
 curl http://localhost:3000/api/health
 ```
 
-If you get a response, you're golden. 🎉
+If you get a response, you're golden.
 
 ---
 
 ## API Endpoints
 
-### 🔓 Auth (Public — no token needed)
+### Auth (Public — no token needed)
 
 | Method | Path                  | Description                          |
 | ------ | --------------------- | ------------------------------------ |
 | POST   | `/api/auth/register`  | sign up a new user                   |
 | POST   | `/api/auth/login`     | log in, get your JWT back            |
 
-### 👥 Users (Admin Only)
+### Users (Admin Only)
 
 | Method | Path                       | Description                        |
 | ------ | -------------------------- | ---------------------------------- |
@@ -174,7 +174,7 @@ If you get a response, you're golden. 🎉
 | PATCH  | `/api/users/:id/status`    | toggle a user's active/inactive    |
 | PATCH  | `/api/users/:id/role`      | change someone's role              |
 
-### 📊 Financial Records
+### Financial Records
 
 | Method | Path                | Who Can Use It     | Description                           |
 | ------ | ------------------- | ------------------ | ------------------------------------- |
@@ -195,7 +195,7 @@ If you get a response, you're golden. 🎉
 | `page`      | number | which page you want (default: 1)          |
 | `limit`     | number | how many per page (default: 10, max: 100) |
 
-### 📈 Dashboard (Any Logged-In User)
+### Dashboard (Any Logged-In User)
 
 | Method | Path                               | Description                         |
 | ------ | ---------------------------------- | ----------------------------------- |
@@ -204,7 +204,7 @@ If you get a response, you're golden. 🎉
 | GET    | `/api/dashboard/recent`            | last 10 records                     |
 | GET    | `/api/dashboard/trends`            | monthly trends (last 6 months)      |
 
-### 🩺 Health Check
+### Health Check
 
 | Method | Path           | Description             |
 | ------ | -------------- | ----------------------- |
